@@ -1,0 +1,70 @@
+<?php include './templates/blocs/header.phtml' ?>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-8">
+                    <h1>Employé Nom prénom</h1>
+                    <h2>Titre</h2>
+                    <h3>email@domaine.com</h3>
+                    <p><strong>N+1&nbsp;: </strong><a href="employee.php?id=XXXXXX">Nom Prénom</a></p>
+                </div>
+                <div class="col-4">
+                    <h4>C.A. effectué&nbsp;: 820 689,54&nbsp;€</h4>
+                    <h4>Bureau&nbsp;: </strong><a href="office.php?id=XXXXXX">Ville - pays</a></h4>
+                    
+                    <p>
+                        <strong>Tél.&nbsp;: </strong>01 01 01 01 01<br>
+                        <strong>Adresse&nbsp;: </strong><br>
+                        Adresse 1<br>
+                        Adresse 2<br>
+                        CP - Ville - Etat - Pays
+                    </p>
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section id="order-detail">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h2>Commandes de ses clients</h2>
+                        <table class="table table-sm table-striped table-hover">
+                            <tr>
+                                <th class="px-3">Numéro de commande</th>
+                                <th class="px-3">Client</th>
+                                <th class="px-3">Date</th>
+                                <th class="px-3">Due le</th>
+                                <th class="px-3">Expédiée le</th>
+                                <th class="px-3">Status</th>
+                                <th class="px-3">Nb pièces</th>
+                                <th class="px-3">Total</th>
+                            </tr>
+                            
+                                <tr>
+                                    <td class="px-3">
+                                        <a href="order.php?id=XXXX">
+                                        XXXX
+                                        </a>
+                                    </td>
+                                    <td class="px-3"><a href="customer.php?id=XXXXXX">Nom du client</a></td>
+                                    <td class="px-3">XX/XX/XXXX</td>
+                                    <td class="px-3">XX/XX/XXXX</td>
+                                    <td class="px-3">XX/XX/XXXX</td>
+                                    <td class="px-3">
+                                    <span class="badge text-bg-primary w-100">
+                                        Status
+                                    </span>
+                                    </td>
+                                    <td class="px-3">XXXX</td>
+                                    <td class="px-3">XXXX€</td>
+                                </tr>
+                                
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+<?php include './templates/blocs/footer.phtml' ?>

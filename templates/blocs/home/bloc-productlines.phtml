@@ -1,0 +1,11 @@
+<h2>Catégories</h2>
+<ul class="list-unstyled d-flex">
+   <?php foreach($productlines as $productline): ?>
+<li>
+        <a href="productLine.php?id=<?=$productline['productLine']?>" class="btn btn-primary mx-1">
+        <?=$productline['productLine']?><br>
+            <span class="badge text-bg-danger"><?=$productline['quantity']?></span>
+        </a>
+    </li>
+    <?php endforeach;?>
+</ul>

@@ -1,0 +1,99 @@
+<?php include './templates/blocs/header.phtml' ?>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <h1>Commande n°<?=$ordersdetails['orderNumber']?></h1>
+                    <p>
+                        <strong>Date de commande&nbsp;: </strong><?=$ordersdetails['orderDate']?><br>
+                        <strong>Statut&nbsp;: </strong>
+                                   
+
+                        
+                        <?php
+                                        $status = "success";
+                                        if($ordersdetails['status'] == "Cancelled"){
+                                            $status = "danger";
+                                        } elseif($ordersdetails['status'] == "Disputed"){
+                                            $status = "warning";
+                                        } elseif($ordersdetails['status'] == "In Process"){
+                                            $status = "primary";
+                                        }
+                                    ?>
+
+
+                        <span class="badge text-bg-<?=$status?>"><?=$ordersdetails['status']?></span><br>
+                        <strong>Commentaires&nbsp;: </strong><br>
+                        <?=$ordersdetails['comments']?>
+                    </p>
+                </div>
+                <div class="col-6">
+                    <h2><a href="customer.php?id=<?=$ordersdetails['customerName']?>"><?=$ordersdetails['customerName']?></a></h2>
+                    <h3><?=$ordersdetails['contactLastName']?> <?=$ordersdetails['contactFirstName']?></h3>
+                    <strong><?=$ordersdetails['phone']?></strong><br>
+                    <strong><?=$ordersdetails['addressLine1']?></strong><br>
+
+                   <?php if($ordersdetails['addressLine2']!= ""): ?>
+                        <p><?=$ordersdetails['addressLine2']?></p>
+                        <?php endif;?>
+                   
+                    <strong>
+                    <?=$ordersdetails['postalCode']?> -
+                     <?=$ordersdetails['city']?> 
+
+                     <?php if($ordersdetails['state']!= ""): ?>
+                        <p><?=$ordersdetails['state']?></p>
+                        <?php endif;?>
+
+                      <?=$ordersdetails['country']?>
+                      
+                    </strong>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section id="order-detail">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h2>Détail de la commande</h2>
+                        <table class="table table-sm table-striped table-hover">
+                            <thead>
+                           
+                                <tr>
+                                    <th>Code produit</th>
+                                    <th>Dénomination</th>
+                                    <th>Catégorie</th>
+                                    <th>Échelle</th>
+                                    <th>Quantité</th>
+                                    <th>Prix unitaire</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($order as $orderc) :  ?>
+                                <tr>
+                                    <td><a href="product.php?id=<?=$orderc['productCode']?>"><?=$orderc['productCode']?></a></td>
+                                    <td><a href="product.php?id=<?=$orderc['productCode']?>"><?=$orderc['productName']?></a></td>
+                                    <td><a href="productline.php?id=<?=$orderc['productLine']?>"><?=$orderc['productLine']?></a></td>
+                                    <td><?=$orderc['productScale']?></td>
+                                    <td><?=$orderc['quantityOrdered']?></td>
+                                    <td><?=euro($orderc['priceEach'])?></td>
+                                    <td><?=euro($orderc['total'])?></td>
+                                </tr>
+                                <?php endforeach;?>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="6"></td>
+                                    <td><h5><?=euro($ordersdetails['total'])?> </h5></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+<?php include './templates/blocs/footer.phtml' ?>

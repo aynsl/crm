@@ -1,0 +1,17 @@
+<h2>Top <?= count($bestcustomers)?> des clients</h2>
+<table class="table table-sm table-striped table-hover">
+    <tr>
+        <th class="px-3">Client</th>
+        <th class="px-3">Chiffre d'affaire</th>
+    </tr>
+    <?php foreach($bestcustomers as $customers): ?>
+    <tr>
+        <td class="px-3">
+            <a href="customer.php?id=<?=$customers['customerNumber']?>">
+            <?=$customers['customerName']?>
+            </a>
+        </td>
+        <td class="px-3"><?=euro($customers['CA'])?></td>
+    </tr>
+    <?php endforeach;?>
+</table>

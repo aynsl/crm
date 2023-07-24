@@ -1,0 +1,98 @@
+<?php include './templates/blocs/header.phtml' ?>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-8">
+                    <h1><?=$customer['customerName']?></h1>
+                    <h2><?=$customer['phone']?></h2>
+                </div>
+                <div class="col-4">
+                    <h4>C.A. effectué&nbsp; <?=euro($customer['CA'])?></h4>
+                    <h5>Limite de crédit&nbsp; <?=euro($customer['creditLimit'])?></h5>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+    <section id="customer-detail">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <p><strong>Contact&nbsp;:</strong> 
+                        <?=$customer['contactLastName']?> 
+                        <?=$customer['contactFirstName']?></p>
+                        <p><strong>Adresse&nbsp;:</strong></p>
+                        <p><?=$customer['addressLine1']?></p>
+
+                    <?php if($customer['addressLine2']!= ""): ?>
+                        <p><?=$customer['addressLine2']?></p>
+                        <?php endif;?>
+
+                    <p><?=$customer['postalCode']?> - <?=$customer['city']?> - <?=$customer['country']?></p>
+
+                    </div>
+                    <div class="col-6">
+                        <h3>Commercial</h3>
+                        <p><?=$customer['lastName']?> <?=$customer['firstName']?> (<?=$customer['email']?>)</p>
+                        <p><?=$customer['officecity']?> - <?=$customer['officecountry']?></p>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="customer-orders">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h2>Commandes de ce client</h2>
+                        <table class="table table-sm table-striped table-hover">
+                         
+                      
+                       
+                        <tr>
+                                <th class="px-3">Numéro de commande</th>
+                                <th class="px-3">Date</th>
+                                <th class="px-3">Due le</th>
+                                <th class="px-3">Expédiée le</th>
+                                <th class="px-3">Status</th>
+                                <th class="px-3">Nb pièces</th>
+                                <th class="px-3">Total</th>
+                            </tr>
+                                <tr>
+                                <?php foreach ($orderscustomer as $orderCustomer) : ?>
+                                <tr>
+                                    <td class="px-3">
+                                        <a href="order.php?id=<?=$orderCustomer['orderNumber']?>">
+                                        <?=$orderCustomer['orderNumber']?>
+                                        </a>
+                                    </td>
+                                    <td class="px-3"><?=$orderCustomer['orderDate']?></td>
+                                    <td class="px-3"><?=$orderCustomer['requiredDate']?></td>
+                                    <td class="px-3"><?=$orderCustomer['orderDate']?></td>
+                                    <td class="px-3">
+                                    <?php
+                                        $status = "success";
+                                        if($orderCustomer['status'] == "Cancelled"){
+                                            $status = "danger";
+                                        } elseif($orderCustomer['status'] == "Disputed"){
+                                            $status = "warning";
+                                        } elseif($orderCustomer['status'] == "In Process"){
+                                            $status = "primary";
+                                        }
+                                    ?>
+                                    <span class="badge text-bg-<?=$status?>"><?=$orderCustomer['status']?></span>
+
+                                    </td>
+                                    <td class="px-3"><?=$orderCustomer['quantity']?></td>
+                                    <td class="px-3"><?=euro($orderCustomer['total'])?></td>
+                                </tr>
+                                <?php endforeach; ?>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <?php  include './templates/blocs/footer.phtml' ?>
